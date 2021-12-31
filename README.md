@@ -32,3 +32,10 @@ Architecture used includes:
 
 1. AWS S3 For Storage
 2. AWS Redshift For Data Warehousing
+
+### Star Schema
+
+The dataset was broken down into fact and dimension tables upon loading to the data warehouse. Below is a visual guide to how the dataset was put to a star schema optimized for data warehouse purposes. The star schema includes:
+
+- 5 Dimension Tables
+- 1 Fact Table
