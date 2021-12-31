@@ -39,3 +39,4 @@ The dataset was broken down into fact and dimension tables upon loading to the d
 
 - 5 Dimension Tables
 - 1 Fact Table
+
