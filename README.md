@@ -53,3 +53,9 @@ Ideal Star Schema Should Consist of:
 
 
 ![Ideal Star Schema of Dataset](https://github.com/Gregory-Essuman/Data-Engineering/blob/main/assets/Ticketsdb%20(1).jpg)
+
+
+
+# Project 2 
+
+## Data Modelling Pipeline (PostgreSQL)
