@@ -1,9 +1,9 @@
 # Data-Engineering
 This repo shall host all tasks and projects with regards to Data Engineering. 
 
-## Project 1
+# Project 1
 
-### Data Warehousing Pipeline-Cloud(AWS RedShift)
+## Data Warehousing Pipeline-Cloud(AWS RedShift)
 
 ### Project Description
 
@@ -21,7 +21,8 @@ The dataset used in this project consist of six(6) text files as pipe delimiterd
 6. venue_pipe.txt
 
 A sample of the dataset can be seen below
-[]()
+
+![Sample Dataset](https://github.com/Gregory-Essuman/Data-Engineering/blob/main/assets/venue_pipe.JPG)
 
 ### Files
 
