@@ -26,7 +26,9 @@ The dataset used in this project consist of six(6) text files as pipe delimiterd
 
 ### Files
 
-The notebook file has the code for an end to end data pipeline on the cloud. 
+1. The notebook file has the code for an end to end data pipeline on the cloud.
+
+2. The cluster.config file is also used by the notebook to parse environment variables for the pipeline. Configparser module in python helps with that.
 
 Architecture used includes:
 
