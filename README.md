@@ -131,10 +131,65 @@ Below is a visual guide to the star schema.
 ### Project Description
 
 The main objective of this project is to build a simple ETL pipeline which pulls covid data from an API, transforms it and load 
-into a postgres warehouse. All these are done in docker containers and scheduled with cron. 
+into a postgres warehouse. All these are done in docker containers and scheduled with cron. The orchestration is done with cron
+and this pulls the data from the API every day, applies the transformation and loads in the warehouse. A dashboard is finally created
+out of the data in Metabase. Four (4) container instances are run in docker making this possible. These instances are:
+
+1. Warehouse (Postgres)
+2. PgAdmin (Database Management System/Tool)
+3. Pipelinerunner (Main etl pipeline script)
+4. Metabase (Dashboard)
 
 ### Dataset
 
 The main data is pulled from an API.A snapshot of the data and its format is seen below. 
 
-[API Snapshot]()
+![API Snapshot](https://github.com/Gregory-Essuman/Data-Engineering/blob/main/assets/Project3-Assets/API%20Snapshot.JPG)
+
+### Folders & Files
+
+1. Containers - This folder contains a pipeplinerunner and warehouse folder of which are included Dockerfile & requirements.txt and setup-covidM.sql respectively.
+ 
+2. scheduler - This folder contains the crontab file for running the main py script. 
+
+3. src/covidmonitor - The main python script for the pipeline is available in here.
+ 
+4. test - The test folder conatains a fixture folder, integration folder and unit folder. This folder holds the files for integration and unit testing. 
+
+### Architecture and Setup used include:
+
+1. PostgreSql
+2. Docker & Docker Compose
+3. Git
+4. AWS (To be included soon)
+5. AWS CLI (To be included soon)
+
+## Running in Local Machine
+
+A personal database was used for this project and therefore configuration settings such as environment variables are not shared in github. 
+It is advisable to create a local database and apply the configuration settings in the codebase in order to run it in docker. 
+The docker containers should run just fine. In the event of the data not showing in pgadmin, then the wait-for command utility tool
+can be applied to let the pipeline runner wait for the warehouse since it is dependent on it. 
+
+There is a [`Makefile`](Makefile) with common commands. These are executed in the running container.
+
+```bash
+cd covidmonitor
+make up # starts all the containers
+make ci # runs formatting, lint check, type check and python test
+```
+If the CI step passes you can go to http://localhost:3000 to checkout your Metabase instance.
+
+## Tear down
+
+The docker containers can be teared down on your local instance with.
+
+```bash
+make down
+```
+
+### Dashboard
+
+Below is a snapshot of the dashboard created 
+
+![Dashboard]()
