@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+    warehouse:
+      image: postgres:13
+      container_name: warehouse
+      environment:
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
+      volumes:
+        - ./containers/warehouse:/docker-entrypoint-initdb.d
+      healthcheck:
+        test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+        interval: 5s
+        retries: 5
+      restart: always
+      ports:
+        - "5432:5432"
+    pgadmin:
+      image: dpage/pgadmin4
+      environment: 
+        - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+        - PGADMIN_DEFAULT_PASSWORD=admin1234
+      ports:
+        - '5050:80'
+      restart: always
+    pipelinerunner:
+      image: pipelinerunner
+      container_name: pipelinerunner
+      build:
+        context: ./
+        dockerfile: ./containers/pipelinerunner/Dockerfile
+      volumes:
+        - ./:/code
+      depends_on:
+        - warehouse
+      environment:
+        WAREHOUSE_USER: ${POSTGRES_USER}
+        WAREHOUSE_PASSWORD: ${POSTGRES_PASSWORD}
+        WAREHOUSE_DB: ${POSTGRES_DB}
+        WAREHOUSE_HOST: ${POSTGRES_HOST}
+        WARREHOUSE_PORT: ${POSTGRES_PORT}
+#      entrypoint: [ "./wait-for.sh", "warehouse:5432", "--", "echo", "warehouse-is-ready" ]  # Uncomment & Apply to override dockerfile entrypoint if wait-for is used.
+#      command: [ "cron", "&&", "tail", "-f", "/var/log/cron.log" ] # Uncomment & Apply to override dockerfile cmd if wait-for is used.
+#    dashboard:
+#      image: metabase/metabase
+#      container_name: dashboard
+#      ports:
+#        - "3000:3000"
