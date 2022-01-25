@@ -1,0 +1,10 @@
+SHELL=/bin/bash
+HOME=/
+# Testing cron
+* * * * * echo "Creating a file in the tmp folder inside pipelinerunner container" > /tmp/anotheroutput.txt
+* * * * * cd tmp && touch /secondtmp
+# Main cron job
+*/10 * * * * cd ./code/src/covidmonitor && /usr/local/bin/python covidM_data_etl.py
+# After test
+* * * * * echo "Welcome to the cron life" > /tmp/newoutput.txt
+# Empty line added to crontab in order for cron daemon to run. Without an empty line, cron won't run.
